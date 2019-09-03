@@ -1,0 +1,96 @@
+/*
+ * @(#)SspAdContentCallerForPC.js 2019. 03. 16
+ *
+ * Copyright 2019 NAVER Corp. All rights Reserved.
+ * NAVER PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
+var SspAdContentCallerForPC = $Class({
+    $init: function() {
+    },
+
+    appendAdContentDiv: function(_adContentLocation) {
+        try {
+            var advertiseDiv = document.createElement("div");
+            advertiseDiv.id = "ssp-adcontent";
+            advertiseDiv.className = "ssp-adcontent";
+
+            var adContentLocation = _adContentLocation || "bottom";
+
+            var seComponents = Array.prototype.slice.call(
+                document.querySelectorAll("#postListBody ._post_wrap:first-of-type .se-main-container .se-component, #postListBody ._post_wrap:first-of-type .__se_component_area .se_component")
+            );
+            if (seComponents.length === 0) {
+                return;
+            }
+            var lastComponent = seComponents[seComponents.length - 1];
+            if (adContentLocation === "top") {
+                // 본문 최상단
+                seComponents[0].parentNode.insertBefore(advertiseDiv, seComponents[0]);
+
+            } else if (adContentLocation === "middle") {
+                // 마지막에서 두번째 이미지 상단 or 마지막 컴포넌트 바로 위
+                var imageComponents = seComponents.filter(function (el) {
+                    var $el = $Element(el);
+                    return $el.hasClass("se-image") || $el.hasClass("se-imageGroup") || $el.hasClass("se-imageStrip") || $el.hasClass("se_image") || $el.hasClass("se-wrappingParagraph");
+                });
+                if (imageComponents.length > 2) {
+                    var targetComponent = imageComponents[imageComponents.length - 2];
+                    targetComponent.parentNode.insertBefore(advertiseDiv, targetComponent);
+                } else {
+                    lastComponent.parentNode.insertBefore(advertiseDiv, lastComponent);
+                }
+            } else {
+                // bottom, 값없을 시 최하단
+                lastComponent.parentNode.appendChild(advertiseDiv);
+            }
+            advertiseDiv.classList.add("align_center");
+        } catch(e) {}
+    },
+
+    renderAdContentDiv: function(tagData, adContentDivId, adContentLocation) {
+        var extraOption = this._makeExtraOptionParam(tagData, true, adContentLocation);
+
+        window.spwp = spwp || {};
+        spwp.cmd = spwp.cmd || [];
+        spwp.cmd.push(function() {
+            spwp.setConfig({
+                enablePersistAd: true
+            });
+            var adUnits = [{
+                unitId: gAdContentUnitIdForPC,
+                divId: adContentDivId,
+                extraOption: extraOption
+            }];
+            spwp.addAdUnits(adUnits);
+            spwp.requestAds({
+                adUnitIds: [gAdContentUnitIdForPC]
+            });
+            spwp.renderAd(adContentDivId);
+        });
+    },
+
+    _makeExtraOptionParam: function(tagData, adContentYN, adContentLocation) {
+        for (var i in tagData) {
+            if (tagData[i].logno == gnFirstLogNo) {
+                this.tagNames = decodeURIComponent(tagData[i].tagName);
+            }
+        }
+
+        return {
+            mediaParams: {
+                bid: gBlogId,
+                pid: "" + gnFirstLogNo,
+                gdid: "" + gdid,
+                sessionId: gsSesseionId,
+                publisherRequest: gsBlogOwnerYn,
+                cnt: 1,
+                pk: gsSearchKeyword,
+                pc: gsFirstCategoryName,
+                pt: this.tagNames,
+                adContentYN: adContentYN,
+                adLocation: adContentLocation
+            }
+        };
+    }
+});
