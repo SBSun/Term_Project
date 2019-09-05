@@ -303,8 +303,8 @@ MonoBehaviour:
   respawnPosition: {x: -48, y: 0, z: 0}
   walkSpeed: 4.5
   jumpPower: 20
-  maxPositionX: 24
-  minPositionX: -18.55
+  maxPositionX: -7
+  minPositionX: -45
   isGround: 0
 --- !u!114 &11747464
 MonoBehaviour:
