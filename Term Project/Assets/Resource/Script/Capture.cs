@@ -12,6 +12,7 @@ public class Capture : MonoBehaviour
     private bool coolDown; // false가 되면 사용 가능
     private bool isFixed;
 
+    /* s를 한번 더 눌러서 고정하는 방법
     void Start()
     {
         copiedGrid.transform.position = originGrid.transform.position;
@@ -19,7 +20,6 @@ public class Capture : MonoBehaviour
         coolDown = false;
         isFixed = false;
     }
-
 
     void Update()
     {
@@ -45,8 +45,16 @@ public class Capture : MonoBehaviour
         coolDown = false;
         isFixed = false;
     }
+    
+    */
 
-    /*
+    // 1초 후 땅이 고정되고 4초간 지속
+    void Start()
+    {
+        copiedGrid.transform.position = originGrid.transform.position;
+        copiedGrid.SetActive(false);
+        coolDown = false;
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.S) && coolDown == false)
@@ -61,7 +69,7 @@ public class Capture : MonoBehaviour
         copiedGrid.SetActive(true);
         copiedGrid.transform.SetParent(Player.transform);
 
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.0f);
 
         copiedGrid.transform.parent = null;
 
@@ -71,8 +79,5 @@ public class Capture : MonoBehaviour
         copiedGrid.SetActive(false);
         coolDown = false;
     }
-    */
-
-
 }
 
