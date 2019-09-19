@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static UIManager instance
     {
-        
+        get
+        {
+            if (m_instance == null)
+            {
+                m_instance = FindObjectOfType<UIManager>();
+            }
+            return m_instance;
+        }
+    }
+    private static UIManager m_instance; //싱글톤이 할당될 변수
+
+    public LobbyUI lobbyUI;
+    public StageUI stageUI;
+
+    public void StartUI()
+    {
+        stageUI.StartUI();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void FinishUI()
     {
-        
+        stageUI.go_StageUI.SetActive( false );
     }
 }

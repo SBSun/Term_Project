@@ -6,10 +6,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public PlayerMove player;
-    public GameObject currentStage;
-    public bool isGameover = false;
-    public int score;
+    public PlayerMove    player;
+    public SaveLoad      theSaveLoad;
+    public Stage         currentStage;
+    public bool          isGameover = false;
+    public int           score;
 
     void Awake()
     {
@@ -29,5 +30,15 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         isGameover = true;
+    }
+
+    public void StageStart()
+    {
+        isGameover = false;
+        currentStage.gameObject.SetActive( true );
+        player.transform.localPosition = currentStage.startPosition;
+        player.gameObject.SetActive( true );
+        theSaveLoad.DBRead();
+        UIManager.instance.StartUI();
     }
 }

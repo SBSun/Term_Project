@@ -19,14 +19,13 @@ public class LivingEntity : MonoBehaviour
     //최대 체력
     public int maxLife;
     //현재 체력
-    public int curLife { get; protected set; }
+    public int curLife;
 
     //죽을 때 실행되는 이벤트
     protected event Action onDie;
 
     virtual protected void Awake()
     {
-        curLife = maxLife;
         status = Status.Live;
     }
 

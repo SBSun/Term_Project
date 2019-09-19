@@ -123,10 +123,11 @@ public class PlayerMove : LivingEntity
     public override void OnDamage()
     {
         base.OnDamage();
+        gameObject.layer = 11;
+        GameManager.instance.theSaveLoad.DBUpdate( "UPDATE TEST Set CurrentHP = " + curLife.ToString() );
+        UIManager.instance.stageUI.UpdateHpText();
         Debug.Log( "OnDamage" );
         playerRb.velocity = Vector2.zero;
-
-        gameObject.layer = 11;
 
         spriteRenderer.color = new Color( 1, 1, 1, 0.4f );
 
@@ -146,7 +147,6 @@ public class PlayerMove : LivingEntity
         {
             if (collision.contacts[0].normal.y > 0.7f)
             {
-                Debug.Log( "땅에 닿음" );
                 isGround = true;
                 playerAnimator.SetBool( "isGround", isGround);
                 playerRb.velocity = Vector2.zero;
@@ -165,14 +165,21 @@ public class PlayerMove : LivingEntity
 
             if(monster.monsterType == Monster.MonsterType.RandomMove || monster.monsterType == Monster.MonsterType.Follow)
             {
-                if (collision.contacts[0].normal.y > 0.7f)
+                if(!isGround)
                 {
-                    collision.transform.GetComponent<LivingEntity>().OnDamage();
-                    playerRb.velocity = new Vector2( 0, 0 );
-                    playerRb.AddForce( Vector2.up * 10f, ForceMode2D.Impulse );
-                    return;
+                    if (transform.localPosition.y > monster.transform.localPosition.y)
+                    {
+                        if (collision.contacts[0].normal.y > 0.7f)
+                        {
+                            Debug.Log( "공격" );
+                            collision.transform.GetComponent<LivingEntity>().OnDamage();
+                            playerRb.velocity = new Vector2( 0, 0 );
+                            playerRb.AddForce( Vector2.up * 10f, ForceMode2D.Impulse );
+                            return;
+                        }
+                    }
                 }
-            }
+            }//OnDamage를 먼저 실행시키게 해야한다.
             OnDamage();
             int direction = transform.position.x - collision.transform.position.x > 0 ? 1 : -1;
             playerRb.AddForce( new Vector2( direction, 1 ) * 5, ForceMode2D.Impulse );

@@ -20,6 +20,7 @@ public class Monster : LivingEntity
     protected override void Awake()
     {
         base.Awake();
+        curLife = maxLife;
         monsterRb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         monsterAnimator = GetComponent<Animator>();

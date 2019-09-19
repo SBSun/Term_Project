@@ -9,7 +9,6 @@ public class LobbyUI : MonoBehaviour
     public void StartButton()
     {
         go_LobbyUI.SetActive( false );
-        GameManager.instance.currentStage.SetActive( true );
-        GameManager.instance.player.gameObject.SetActive( true );
+        GameManager.instance.StageStart();
     }
 }
