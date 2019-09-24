@@ -30,25 +30,25 @@ public class ToothWheel : Monster
     { 
         if(moveType == MoveType.MoveX)
         {
-            if (transform.position.x >= maxPositionX)
+            if (transform.localPosition.x >= maxPositionX)
                 direction = -1;
 
-            else if (transform.position.x <= minPositionX)
+            else if (transform.localPosition.x <= minPositionX)
                 direction = 1;
 
             Vector3 pos = Vector3.right * direction * speed * Time.deltaTime;
-            transform.position = transform.position + pos;
+            transform.localPosition = transform.localPosition + pos;
         }
         else
         {
-            if (transform.position.y >= maxPositionY)
+            if (transform.localPosition.y >= maxPositionY)
                 direction = -1;
             
-            else if (transform.position.y <= minPositionY)
+            else if (transform.localPosition.y <= minPositionY)
                 direction = 1;
 
             Vector3 pos = Vector3.up * direction * speed * Time.deltaTime;
-            transform.position = transform.position + pos;
+            transform.localPosition = transform.localPosition + pos;
         }
     }
 }

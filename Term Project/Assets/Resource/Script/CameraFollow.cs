@@ -7,7 +7,7 @@ public class CameraFollow : MonoBehaviour
 {
     public GameObject go_Player;
 
-    public bool isMove = true;
+    public bool isMove;
 
     void LateUpdate()
     {
@@ -17,7 +17,7 @@ public class CameraFollow : MonoBehaviour
         if (!isMove)
             return;
 
-        transform.position = new Vector3(go_Player.transform.position.x, transform.position.y, transform.position.z );
+        transform.localPosition = new Vector3(go_Player.transform.localPosition.x, transform.localPosition.y, transform.localPosition.z );
     }    
 
     public void StopCamera()

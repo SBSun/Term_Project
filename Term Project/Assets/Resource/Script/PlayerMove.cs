@@ -34,6 +34,7 @@ public class PlayerMove : LivingEntity
         playerRb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerAnimator = GetComponent<Animator>();
+        Camera.main.GetComponent<CameraFollow>().isMove = false;
     }
 
     void Update()
@@ -147,6 +148,7 @@ public class PlayerMove : LivingEntity
         {
             if (collision.contacts[0].normal.y > 0.7f)
             {
+                Debug.Log( "땅에 닿음" );   
                 isGround = true;
                 playerAnimator.SetBool( "isGround", isGround);
                 playerRb.velocity = Vector2.zero;
@@ -211,14 +213,28 @@ public class PlayerMove : LivingEntity
 
     void OnCollisionExit2D( Collision2D collision )
     {
-        if(collision.transform.tag == "MoveBlock")
+        if (collision.transform.tag == "MoveBlock")
         {
             isMoveBlock = false;
+        }
+        else if (collision.transform.tag == "Platform")
+            isGround = false;
+    }
+
+    void OnTriggerStay2D( Collider2D collision )
+    {
+        if(collision.tag == "StartDoor")
+        {
+            if(Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                GameManager.instance.currentStage = GameManager.instance.stages[collision.GetComponent<StartDoor>().chapterNumber - 1];
+                GameManager.instance.StageStart();
+            }
         }
     }
 
     public void PlayerRespawn()
     {
-        transform.position = respawnPosition;
+        transform.localPosition = respawnPosition;
     }
 }
