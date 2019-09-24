@@ -10,6 +10,7 @@ public class LobbyUI : MonoBehaviour
     {
         go_LobbyUI.SetActive( false );
         GameManager.instance.go_ChapterSelect.SetActive( true );
+        GameManager.instance.player.transform.localPosition = new Vector2( -8.13f, -2.46f );
         GameManager.instance.player.gameObject.SetActive( true );
     }
 }

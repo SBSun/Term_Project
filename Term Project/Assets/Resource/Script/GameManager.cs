@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public PlayerMove    player;
     public SaveLoad      theSaveLoad;
     public Stage         currentStage;
+    public Stage[]       stages;
     public GameObject    go_ChapterSelect;
     public bool          isGameover = false;
     public int           score;
@@ -36,10 +37,13 @@ public class GameManager : MonoBehaviour
     public void StageStart()
     {
         isGameover = false;
-        currentStage.gameObject.SetActive( true );
-        player.transform.localPosition = currentStage.startPosition;
+        Camera.main.GetComponent<CameraFollow>().StopCamera();
+        Camera.main.transform.localPosition = new Vector3( 0, 0, -1 );
+        player.transform.localPosition = currentStage.playerStartPosition;
         player.gameObject.SetActive( true );
+        go_ChapterSelect.SetActive( false );
         theSaveLoad.DBRead();
         UIManager.instance.StartUI();
+        currentStage.gameObject.SetActive( true );
     }
 }

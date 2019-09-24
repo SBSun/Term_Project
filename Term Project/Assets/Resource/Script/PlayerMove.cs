@@ -221,6 +221,18 @@ public class PlayerMove : LivingEntity
             isGround = false;
     }
 
+    void OnTriggerStay2D( Collider2D collision )
+    {
+        if(collision.tag == "StartDoor")
+        {
+            if(Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                GameManager.instance.currentStage = GameManager.instance.stages[collision.GetComponent<StartDoor>().chapterNumber - 1];
+                GameManager.instance.StageStart();
+            }
+        }
+    }
+
     public void PlayerRespawn()
     {
         transform.localPosition = respawnPosition;
