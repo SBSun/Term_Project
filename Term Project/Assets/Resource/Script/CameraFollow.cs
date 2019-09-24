@@ -6,7 +6,7 @@ public class CameraFollow : MonoBehaviour
 {
     public GameObject go_Player;
 
-    public bool isMove = true;
+    public bool isMove;
 
     void LateUpdate()
     {

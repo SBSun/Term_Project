@@ -8,6 +8,7 @@ TagManager:
   - Monster
   - DeathLine
   - MoveBlock
+  - StartDoor
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - PlayerDamage
   - MonsterDeath
   - CopyPlatform
-  - 
+  - Missile
   - 
   - 
   - 
@@ -51,9 +52,12 @@ TagManager:
   - name: Platform
     uniqueID: 867054249
     locked: 0
-  - name: Monster
+  - name: Enviroment
     uniqueID: 2160029423
     locked: 0
-  - name: Player
+  - name: Monster
     uniqueID: 638865935
+    locked: 0
+  - name: Player
+    uniqueID: 2639828837
     locked: 0

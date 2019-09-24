@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public PlayerMove    player;
     public SaveLoad      theSaveLoad;
     public Stage         currentStage;
+    public GameObject    go_ChapterSelect;
     public bool          isGameover = false;
     public int           score;
 
