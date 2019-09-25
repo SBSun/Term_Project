@@ -12,6 +12,12 @@ public class MissileLauncher : MonoBehaviour
     //일정 범위 내에 타겠이있으면 타켓의 정보를 담는다.
     public LayerMask layerMask;
     public GameObject go_MissilePrefab;
+    private Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     void Start()
     {
@@ -31,6 +37,7 @@ public class MissileLauncher : MonoBehaviour
                     Missile missile = Instantiate( go_MissilePrefab, transform.position, Quaternion.identity ).GetComponent<Missile>();
                     missile.transform.parent = transform;
                     missile.GetComponent<Rigidbody2D>().velocity = Vector2.up * 5;
+                    animator.SetTrigger( "Shoot" );
                 }
             }
             yield return new WaitForSeconds( 0.1f );
