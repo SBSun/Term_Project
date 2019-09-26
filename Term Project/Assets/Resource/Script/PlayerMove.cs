@@ -8,7 +8,7 @@ public class PlayerMove : LivingEntity
     public Rigidbody2D          playerRb;
     private SpriteRenderer      spriteRenderer;
     private Animator            playerAnimator;
-    private RaycastHit2D        hitInfo;
+    private GetItem             getItem;    
     public  Vector3             respawnPosition;
 
     private float               currentSpeed;
@@ -34,6 +34,7 @@ public class PlayerMove : LivingEntity
         playerRb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerAnimator = GetComponent<Animator>();
+        getItem = GetComponent<GetItem>();
         Camera.main.GetComponent<CameraFollow>().isMove = false;
     }
 
@@ -72,9 +73,25 @@ public class PlayerMove : LivingEntity
         moveX = Input.GetAxisRaw( "Horizontal" );
 
         if (moveX == 1)
+        {
             spriteRenderer.flipX = false;
+
+            if(getItem.isWeapon)
+                getItem.currentWeapon.RightChange();
+
+            if (getItem.isShield)
+                getItem.currentShield.RightChange();
+        }
         else if (moveX == -1)
+        {
             spriteRenderer.flipX = true;
+            if (getItem.isWeapon)
+                getItem.currentWeapon.LeftChange();
+            
+            if (getItem.isShield)
+                getItem.currentShield.LeftChange();
+        }
+            
 
         playerRb.AddForce( Vector2.right * moveX, ForceMode2D.Impulse );
 
@@ -103,7 +120,6 @@ public class PlayerMove : LivingEntity
 
     public void MoveBlock() //MoveBlock위에서의 캐릭터 움직임
     {
-
         Vector3 pos = Vector3.right * moveBlockDirection * moveBlockSpeed * Time.deltaTime;
         transform.position = transform.position + pos;
     }
@@ -123,13 +139,28 @@ public class PlayerMove : LivingEntity
 
     public override void OnDamage()
     {
-        base.OnDamage();
+        if (!getItem.isShield)
+            curLife--;
+        else
+        {
+            getItem.isShield = false;
+            Destroy( getItem.currentShield.gameObject );
+            getItem.currentShield = null;
+        }
+
+        if(curLife <= 0)
+        {
+            Die();
+        }
+
         gameObject.layer = 11;
         GameManager.instance.theSaveLoad.DBUpdate( "UPDATE TEST Set CurrentHP = " + curLife.ToString() );
         UIManager.instance.stageUI.UpdateHpText();
         Debug.Log( "OnDamage" );
         playerRb.velocity = Vector2.zero;
 
+        if(getItem.isWeapon)
+            getItem.currentWeapon.GetComponent<SpriteRenderer>().color = new Color( 1, 1, 1, 0.4f );
         spriteRenderer.color = new Color( 1, 1, 1, 0.4f );
 
         Invoke( "OffDamage", 1.5f );
@@ -139,6 +170,8 @@ public class PlayerMove : LivingEntity
     {
         gameObject.layer = 10;
 
+        if(getItem.isWeapon)
+            getItem.currentWeapon.GetComponent<SpriteRenderer>().color = new Color( 1, 1, 1, 1 );
         spriteRenderer.color = new Color( 1, 1, 1, 1 );
     }
 

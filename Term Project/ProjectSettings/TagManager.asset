@@ -9,6 +9,7 @@ TagManager:
   - DeathLine
   - MoveBlock
   - StartDoor
+  - Item
   layers:
   - Default
   - TransparentFX

@@ -6,7 +6,7 @@ using System;
 //체력이 존재하는 오브젝트들의 부모 클래스
 //장애물, 플레이어 오브젝트 등
 //체력이 있고 죽을 수 있는(파괴 될 수 있는) 오브젝트들에게 할당
-public class LivingEntity : MonoBehaviour
+public abstract class LivingEntity : MonoBehaviour
 {
     public enum Status
     {
@@ -30,13 +30,8 @@ public class LivingEntity : MonoBehaviour
     }
 
     //데미지를 받았을 때 실행되는 함수
-    virtual public void OnDamage()
-    {
-        curLife -= 1;
+    abstract public void OnDamage();
 
-        if (curLife <= 0)
-            Die();
-    }
 
     //죽었을 때 실행되는 함수
     public void Die()

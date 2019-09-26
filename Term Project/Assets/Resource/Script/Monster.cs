@@ -17,6 +17,16 @@ public class Monster : LivingEntity
     protected SpriteRenderer    spriteRenderer;
     protected Animator          monsterAnimator;
 
+    public override void OnDamage()
+    {
+        curLife--;
+
+        if(curLife <= 0)
+        {
+            Die();
+        }
+    }
+
     protected override void Awake()
     {
         base.Awake();

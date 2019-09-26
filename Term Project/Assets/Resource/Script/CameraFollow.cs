@@ -2,40 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/* 원래 코드
 public class CameraFollow : MonoBehaviour
 {
     public GameObject go_Player;
 
-    public bool isMove;
-
-    void LateUpdate()
-    {
-        if (GameManager.instance.isGameover)
-            return;
-
-        if (!isMove)
-            return;
-
-        transform.localPosition = new Vector3(go_Player.transform.localPosition.x, transform.localPosition.y, transform.localPosition.z );
-    }    
-
-    public void StopCamera()
-    {
-        isMove = false;
-    }
-
-    public void MoveCamera()
-    {
-        isMove = true;
-    }
-}
-*/
-
-public class CameraFollow : MonoBehaviour
-{
-    public GameObject go_Player;
-
+    public float followSpeed;
     public bool isMove = true;
     private double firstTransformY;
 
@@ -51,16 +22,8 @@ public class CameraFollow : MonoBehaviour
         if (!isMove)
             return;
 
-        if (go_Player.transform.position.y >= this.transform.position.y + 1.0f || this.transform.position.y > firstTransformY)
-        {
-            this.transform.position = new Vector3(go_Player.transform.position.x,
-                                                  Mathf.Lerp(this.transform.position.y, go_Player.transform.position.y, Time.deltaTime * 1.5f),
-                                                  this.transform.position.z);
-        }
-        else
-            this.transform.position = new Vector3(go_Player.transform.position.x,
-                                                  this.transform.position.y,
-                                                  this.transform.position.z);
+        transform.localPosition = Vector3.Lerp( transform.localPosition, go_Player.transform.localPosition, Time.deltaTime * followSpeed );
+        transform.localPosition = new Vector3( transform.localPosition.x, transform.localPosition.y, -1f );
     }
 
     public void StopCamera()
