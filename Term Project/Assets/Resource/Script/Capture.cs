@@ -45,7 +45,6 @@ public class Capture : MonoBehaviour
         coolDown = false;
         isFixed = false;
     }
-    
     */
 
     // 1초 후 땅이 고정되고 4초간 지속
@@ -55,6 +54,7 @@ public class Capture : MonoBehaviour
         copiedGrid.SetActive(false);
         coolDown = false;
     }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.S) && coolDown == false)

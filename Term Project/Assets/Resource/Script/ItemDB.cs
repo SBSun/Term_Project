@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemDB : MonoBehaviour
-{
-    
+{    
     public void GetItem(ItemPickUp _itemPickUp)
     {
         if(_itemPickUp != null)

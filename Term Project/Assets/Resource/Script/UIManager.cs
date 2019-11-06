@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
 
     public void StartUI()
     {
-        stageUI.StartUI();
+        stageUI.StartUI();  
     }
 
     public void FinishUI()
