@@ -19,7 +19,10 @@ public class LobbyUI : MonoBehaviour
         foreach (DataRow dr in rows)
         {
             for (int i = 0; i < ds.Tables[0].Columns.Count; i++)
+            {
                 Debug.Log(dr[i]);
+            }
         }
+        Debug.Log(rows[0]);
     }
 }

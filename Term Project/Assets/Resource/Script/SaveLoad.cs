@@ -73,7 +73,7 @@ public class SaveLoad : MonoBehaviour
             Debug.Log("DB 연결 실패");
     }
 
-    public void DBRead(string _query = "Select * from TEST")
+    public void DBRead(string _query = "select * from user where 1=2")
     {
         dbConnection = new SqliteConnection(GetDBFilePath());
         dbConnection.Open();
