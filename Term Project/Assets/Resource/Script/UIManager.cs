@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     }
     private static UIManager m_instance; //싱글톤이 할당될 변수
 
+    public LoginUI loginUI;
     public LobbyUI lobbyUI;
     public StageUI stageUI;
 
