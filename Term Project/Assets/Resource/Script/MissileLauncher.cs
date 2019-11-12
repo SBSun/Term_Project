@@ -19,7 +19,7 @@ public class MissileLauncher : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    void Start()
+    private void Start()
     {
         StartCoroutine( ShootCoroutine() );
     }

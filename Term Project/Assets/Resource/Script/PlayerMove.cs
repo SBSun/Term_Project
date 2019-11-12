@@ -154,9 +154,7 @@ public class PlayerMove : LivingEntity
         }
 
         gameObject.layer = 11;
-        GameManager.instance.theSaveLoad.DBUpdate( "UPDATE TEST Set CurrentHP = " + curLife.ToString() );
         UIManager.instance.stageUI.UpdateHpText();
-        Debug.Log( "OnDamage" );
         playerRb.velocity = Vector2.zero;
 
         if(getItem.isWeapon)
@@ -181,7 +179,6 @@ public class PlayerMove : LivingEntity
         {
             if (collision.contacts[0].normal.y > 0.7f)
             {
-                Debug.Log( "땅에 닿음" );   
                 isGround = true;
                 playerAnimator.SetBool( "isGround", isGround);
                 playerRb.velocity = Vector2.zero;
