@@ -42,7 +42,6 @@ public class GameManager : MonoBehaviour
         player.transform.localPosition = currentStage.playerStartPosition;
         player.gameObject.SetActive( true );
         go_ChapterSelect.SetActive( false );
-        theSaveLoad.DBRead();
         UIManager.instance.StartUI();
         currentStage.gameObject.SetActive( true );
     }
