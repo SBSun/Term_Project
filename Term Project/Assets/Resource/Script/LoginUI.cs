@@ -38,7 +38,7 @@ public class LoginUI : MonoBehaviour
             Debug.Log("did:" + did + "\ndpw:" + dpw);
         
         //비교
-        if (id == did && pw == dpw)
+        if ((id == did && pw == dpw) && (id!=string.Empty||pw!=string.Empty))
         {
             gotoLobby();
         }

@@ -1,0 +1,125 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Data;
+using System.Text.RegularExpressions;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class SignUpUI : MonoBehaviour
+{
+    public GameObject BackgroundPanel;// 백그라운드 패널을 껐다키며 화면 전환
+    public GameObject IDinputField;   // 아이디 입력
+    public GameObject PWinputField;   // 비밀번호 입력
+    public GameObject REPWinputField; // 비밀번호 재입력
+    public GameObject outputLabel;    // 경고메세지를 띄울 라벨
+
+    private string id = string.Empty; // inputfield의 id
+    private string pw = string.Empty; // inputfield의 pw
+    private string repw = string.Empty;
+    private string did = string.Empty;// 데이터베이스에서 가져온 id
+
+    private bool isPushedButton = false;
+
+    // SignUpUI를 onoff하는 함수
+    public void TurnPanel()
+    {
+        if (BackgroundPanel.activeSelf)
+            BackgroundPanel.SetActive(false);
+        else
+            BackgroundPanel.SetActive(true);
+    }
+
+    // Submit 버튼에 들어갈 함수
+    public void SubmitButton()
+    {
+        id = IDinputField.GetComponent<InputField>().text;
+        pw = PWinputField.GetComponent<InputField>().text;
+        repw = REPWinputField.GetComponent<InputField>().text;
+
+        ParsingData(); // id,pw,repw의 공백 제거
+        if (isIDPWvalid() == false) // idpw조건에 안맞거나 repw 잘못입력했을경우
+        {
+            if (isPushedButton == false)
+            {
+                isPushedButton = true;
+                StartCoroutine(FadeText("pw조건이 맞지 않거나 repw가 잘못 입력되었습니다."));
+            }
+            return;
+        }
+
+        if (CheckDB() == false) // 아이디가 중복되어 있을경우
+        {
+            if (isPushedButton == false)
+            {
+                isPushedButton = true;
+                StartCoroutine(FadeText("이미 같은 id가 존재합니다."));
+            }
+            return;
+        }
+        //여기 insert문 추가해야함
+        SaveLoad.instance.DBInsert("INSERT INTO user VALUES('"+id+"','"+pw+"')");
+        TurnPanel(); // 회원가입 완료.
+    }
+
+    // id,pw,repw 파싱
+    private void ParsingData()
+    {
+        id = id.Replace(" ", "");
+        pw = pw.Replace(" ", "");
+        repw = repw.Replace(" ", "");
+    }
+    // idpw가 조건에 맞고 pw와 repw가 일치하면 true, 아니면 false
+    private bool isIDPWvalid()
+    {
+        Regex idrx = new Regex("^[A-Za-z0-9]{5,20}$");
+        Regex pwrx = new Regex("^[A-Za-z0-9]{5,20}$");
+
+        // id검사
+        Match m = idrx.Match(id);
+        if (!m.Success) return false;
+        // pw검사
+        m = pwrx.Match(pw);
+        if (!m.Success) return false;
+        // repw검사
+        if (pw != repw) return false;
+
+        return true;
+    }
+
+    // id의 중복을 검사함
+    private bool CheckDB()
+    {
+        DataSet ds = SaveLoad.instance.DBReadByAdapter("SELECT id FROM user WHERE id=" + "'" + id +"'");
+        DataRowCollection rows = ds.Tables[0].Rows;
+        foreach (DataRow dr in rows)
+            did = dr[0].ToString();
+
+        if (did != string.Empty) //did에 값이 있으면
+            return false;        //중복 아이디가 있으므로 false
+
+        return true;
+    }
+
+    IEnumerator FadeText(string str)
+    {
+        outputLabel.GetComponent<Text>().text = str;
+        Color _color = outputLabel.GetComponent<Text>().color;
+        _color.a = 1.0f;
+        outputLabel.GetComponent<Text>().color = _color;
+        float _time = 0;
+
+        yield return new WaitForSeconds(2.0f);
+        while(_time < 1f)
+        {
+            _time += Time.deltaTime;
+
+            _color.a = Mathf.Lerp(1, 0, _time / 1);
+            outputLabel.GetComponent<Text>().color = _color;
+
+            yield return null;
+        }
+        
+        outputLabel.GetComponent<Text>().text = "";
+        isPushedButton = false; 
+    }
+}
