@@ -10,7 +10,7 @@ public class LoginUI : MonoBehaviour
     public GameObject LobbyUIBackGruond;
     public GameObject idTextBox;
     public GameObject pwTextBox;
-
+    public GameObject outputLabel;
 
     public void LoginButton()
     {
@@ -33,7 +33,8 @@ public class LoginUI : MonoBehaviour
 
         //가져온 값 출력
         if (did == string.Empty || dpw == string.Empty)
-            Debug.Log("did나 dpw가 비었음");
+            UIManager.instance.FadeText(outputLabel, "일치하는 사용자 정보가 없습니다.");
+        //Debug.Log("did나 dpw가 비었음");
         else
             Debug.Log("did:" + did + "\ndpw:" + dpw);
         
@@ -44,7 +45,7 @@ public class LoginUI : MonoBehaviour
         }
         else
         {
-            Debug.Log("로그인 실패 (값이 다름)");
+            UIManager.instance.FadeText(outputLabel, "사용자 정보가 일치하지 않습니다.");
         }
 
     }

@@ -39,21 +39,13 @@ public class SignUpUI : MonoBehaviour
         ParsingData(); // id,pw,repw의 공백 제거
         if (isIDPWvalid() == false) // idpw조건에 안맞거나 repw 잘못입력했을경우
         {
-            if (isPushedButton == false)
-            {
-                isPushedButton = true;
-                StartCoroutine(FadeText("pw조건이 맞지 않거나 repw가 잘못 입력되었습니다."));
-            }
+            UIManager.instance.FadeText(outputLabel, "idpw조건이 맞지 않거나 repw가 잘못 입력되었습니다.");
             return;
         }
 
         if (CheckDB() == false) // 아이디가 중복되어 있을경우
         {
-            if (isPushedButton == false)
-            {
-                isPushedButton = true;
-                StartCoroutine(FadeText("이미 같은 id가 존재합니다."));
-            }
+            UIManager.instance.FadeText(outputLabel, "이미 같은 id가 존재합니다.");
             return;
         }
         //여기 insert문 추가해야함
@@ -98,28 +90,5 @@ public class SignUpUI : MonoBehaviour
             return false;        //중복 아이디가 있으므로 false
 
         return true;
-    }
-
-    IEnumerator FadeText(string str)
-    {
-        outputLabel.GetComponent<Text>().text = str;
-        Color _color = outputLabel.GetComponent<Text>().color;
-        _color.a = 1.0f;
-        outputLabel.GetComponent<Text>().color = _color;
-        float _time = 0;
-
-        yield return new WaitForSeconds(2.0f);
-        while(_time < 1f)
-        {
-            _time += Time.deltaTime;
-
-            _color.a = Mathf.Lerp(1, 0, _time / 1);
-            outputLabel.GetComponent<Text>().color = _color;
-
-            yield return null;
-        }
-        
-        outputLabel.GetComponent<Text>().text = "";
-        isPushedButton = false; 
     }
 }
