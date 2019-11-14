@@ -91,4 +91,19 @@ public class SignUpUI : MonoBehaviour
 
         return true;
     }
+
+    public void eyeButtonDown()
+    {
+        PWinputField.GetComponent<InputField>().contentType = InputField.ContentType.Standard;
+        REPWinputField.GetComponent<InputField>().contentType = InputField.ContentType.Standard;
+        PWinputField.GetComponent<InputField>().ForceLabelUpdate();
+        REPWinputField.GetComponent<InputField>().ForceLabelUpdate();
+    }
+    public void eyeButtonUp()
+    {
+        PWinputField.GetComponent<InputField>().contentType = InputField.ContentType.Password;
+        REPWinputField.GetComponent<InputField>().contentType = InputField.ContentType.Password;
+        PWinputField.GetComponent<InputField>().ForceLabelUpdate();
+        REPWinputField.GetComponent<InputField>().ForceLabelUpdate();
+    }
 }
