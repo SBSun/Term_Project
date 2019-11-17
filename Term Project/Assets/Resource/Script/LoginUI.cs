@@ -31,10 +31,8 @@ public class LoginUI : MonoBehaviour
             dpw = dr[1].ToString();
         }
 
-        //가져온 값 출력
         if (did == string.Empty || dpw == string.Empty)
             UIManager.instance.FadeText(outputLabel, "일치하는 사용자 정보가 없습니다.");
-        //Debug.Log("did나 dpw가 비었음");
         else
             Debug.Log("did:" + did + "\ndpw:" + dpw);
         

@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class SignUpUI : MonoBehaviour
 {
+
+    #region 변수선언부
     public GameObject BackgroundPanel;// 백그라운드 패널을 껐다키며 화면 전환
     public GameObject IDinputField;   // 아이디 입력
     public GameObject PWinputField;   // 비밀번호 입력
@@ -19,6 +21,8 @@ public class SignUpUI : MonoBehaviour
     private string did = string.Empty;// 데이터베이스에서 가져온 id
 
     private bool isPushedButton = false;
+    #endregion
+
 
     // SignUpUI를 onoff하는 함수
     public void TurnPanel()
@@ -28,6 +32,7 @@ public class SignUpUI : MonoBehaviour
         else
             BackgroundPanel.SetActive(true);
     }
+
 
     // Submit 버튼에 들어갈 함수
     public void SubmitButton()
@@ -48,18 +53,22 @@ public class SignUpUI : MonoBehaviour
             UIManager.instance.FadeText(outputLabel, "이미 같은 id가 존재합니다.");
             return;
         }
-        //여기 insert문 추가해야함
+
         SaveLoad.instance.DBInsert("INSERT INTO user VALUES('"+id+"','"+pw+"')");
         TurnPanel(); // 회원가입 완료.
     }
 
+
     // id,pw,repw 파싱
     private void ParsingData()
     {
-        id = id.Replace(" ", "");
+        id = id.Replace(" ", ""); // 공백제거
         pw = pw.Replace(" ", "");
         repw = repw.Replace(" ", "");
     }
+
+
+    #region id, pw 검사
     // idpw가 조건에 맞고 pw와 repw가 일치하면 true, 아니면 false
     private bool isIDPWvalid()
     {
@@ -91,7 +100,10 @@ public class SignUpUI : MonoBehaviour
 
         return true;
     }
+    #endregion
 
+
+    #region 비밀번호를 확인하는 눈동자버튼
     public void eyeButtonDown()
     {
         PWinputField.GetComponent<InputField>().contentType = InputField.ContentType.Standard;
@@ -106,4 +118,5 @@ public class SignUpUI : MonoBehaviour
         PWinputField.GetComponent<InputField>().ForceLabelUpdate();
         REPWinputField.GetComponent<InputField>().ForceLabelUpdate();
     }
+    #endregion
 }
