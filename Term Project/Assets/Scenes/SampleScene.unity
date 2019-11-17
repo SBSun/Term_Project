@@ -2006,7 +2006,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   go_Player: {fileID: 11747457}
-  followSpeed: 1
+  followSpeed: 2
   center: {x: 0, y: 0}
   size: {x: 0, y: 0}
 --- !u!20 &519420031

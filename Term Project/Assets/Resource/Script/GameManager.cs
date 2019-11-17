@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     public void ChapterSelectStageStart()
     {
         currentStage = stages[0];
+        currentStage.gameObject.SetActive( true );
         player.transform.localPosition = currentStage.playerStartPosition;
         Camera.main.GetComponent<CameraFollow>().SetCamera();
         player.gameObject.SetActive( true );

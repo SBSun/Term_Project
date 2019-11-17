@@ -26,7 +26,14 @@ public class CameraFollow : MonoBehaviour
             return;
 
         transform.position = Vector3.Lerp( transform.position, GameManager.instance.player.transform.position, Time.deltaTime * followSpeed );
-        transform.position = new Vector3( transform.position.x, transform.position.y, -10 );
+
+        float mX = size.x * 0.5f - width;
+        float clampX = Mathf.Clamp( transform.position.x, -mX + center.x, mX + center.x );
+
+        float mY = size.y * 0.5f - height;
+        float clampY = Mathf.Clamp( transform.position.y, -mY + center.y, mY + center.y );
+
+        transform.position = new Vector3( clampX, clampY, -10 );
     }
 
     public void SetCamera()
