@@ -17,7 +17,7 @@ public class ItemDB : MonoBehaviour
                 else
                     _itemPickUp.GetComponent<WeaponController>().RightChange();
             }
-            else if(_itemPickUp.item.itemType == Item.ItemType.Used)
+            else if(_itemPickUp.item.itemType == Item.ItemType.Use)
             {
                 //포션 같은 소모성 아이템을 얻었을 때
             }
