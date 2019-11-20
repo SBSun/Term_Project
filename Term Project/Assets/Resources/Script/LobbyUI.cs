@@ -9,6 +9,8 @@ public class LobbyUI : MonoBehaviour
 
     public void StartButton()
     {
+        SoundManager.instance.PlaySFX( "Click_1" );
+
         go_LobbyUI.SetActive( false );
         GameManager.instance.ChapterSelectStageStart();
 
