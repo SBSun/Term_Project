@@ -14,6 +14,8 @@ public class LoginUI : MonoBehaviour
 
     public void LoginButton()
     {
+        SoundManager.instance.PlaySFX( "Click_1" );
+
         string id = idTextBox.GetComponent<InputField>().text;
         string pw = pwTextBox.GetComponent<InputField>().text;
         string did = string.Empty;

@@ -27,6 +27,8 @@ public class SignUpUI : MonoBehaviour
     // SignUpUI를 onoff하는 함수
     public void TurnPanel()
     {
+        SoundManager.instance.PlaySFX( "Click_1" );
+
         if (BackgroundPanel.activeSelf)
             BackgroundPanel.SetActive(false);
         else
@@ -37,6 +39,8 @@ public class SignUpUI : MonoBehaviour
     // Submit 버튼에 들어갈 함수
     public void SubmitButton()
     {
+        SoundManager.instance.PlaySFX( "Click_1" );
+
         id = IDinputField.GetComponent<InputField>().text;
         pw = PWinputField.GetComponent<InputField>().text;
         repw = REPWinputField.GetComponent<InputField>().text;

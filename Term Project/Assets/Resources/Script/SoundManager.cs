@@ -25,6 +25,7 @@ public class SoundManager : MonoBehaviour
 
     }
 
+    [SerializeField]
     public Dictionary<SoundType, List<AudioClip>> audioClips = new Dictionary<SoundType, List<AudioClip>>();
 
     public AudioSource bgmPlayer;
@@ -44,6 +45,8 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         LoadFiles();
+
+        PlayBGM( "BGM_1" );
     }
 
     void LoadFiles()
@@ -84,11 +87,6 @@ public class SoundManager : MonoBehaviour
         }
 
         return result;
-    }
-
-    public void PlayBGM()
-    {
-        bgmPlayer.Play();
     }
 
     public void PlayBGM( string name )
