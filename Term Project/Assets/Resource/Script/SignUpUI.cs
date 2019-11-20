@@ -20,7 +20,6 @@ public class SignUpUI : MonoBehaviour
     private string repw = string.Empty;
     private string did = string.Empty;// 데이터베이스에서 가져온 id
 
-    private bool isPushedButton = false;
     #endregion
 
 

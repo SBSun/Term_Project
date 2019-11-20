@@ -4,8 +4,8 @@ using UnityEngine;
 
 public enum SoundType
 {
-    BGM,
-    SFX
+    BGM,    // 배경음
+    SFX     // 효과음
 }
 
 public class SoundManager : MonoBehaviour
