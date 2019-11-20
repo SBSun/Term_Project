@@ -35,7 +35,6 @@ public class PlayerMove : LivingEntity
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerAnimator = GetComponent<Animator>();
         getItem = GetComponent<GetItem>();
-        Camera.main.GetComponent<CameraFollow>().isMove = false;
     }
 
     void Update()
@@ -99,8 +98,6 @@ public class PlayerMove : LivingEntity
             playerRb.velocity = new Vector2( currentSpeed, playerRb.velocity.y );
         else if (playerRb.velocity.x < -currentSpeed)
             playerRb.velocity = new Vector2( -currentSpeed, playerRb.velocity.y );
-
-        CameraCheck();
     }
 
     public void TryJump()
@@ -122,19 +119,6 @@ public class PlayerMove : LivingEntity
     {
         Vector3 pos = Vector3.right * moveBlockDirection * moveBlockSpeed * Time.deltaTime;
         transform.position = transform.position + pos;
-    }
-
-    public void CameraCheck()
-    {
-        if (transform.localPosition.x > maxPositionX || transform.localPosition.x < minPositionX)
-        {
-            Camera.main.GetComponent<CameraFollow>().StopCamera();
-        }
-
-        else if (transform.localPosition.x < maxPositionX && transform.localPosition.x > minPositionX)
-        {
-            Camera.main.GetComponent<CameraFollow>().MoveCamera();
-        }
     }
 
     public override void OnDamage()
@@ -257,7 +241,7 @@ public class PlayerMove : LivingEntity
         {
             if(Input.GetKeyDown(KeyCode.UpArrow))
             {
-                GameManager.instance.currentStage = GameManager.instance.stages[collision.GetComponent<StartDoor>().chapterNumber - 1];
+                GameManager.instance.currentStage = GameManager.instance.stages[collision.GetComponent<StartDoor>().chapterNumber];
                 GameManager.instance.StageStart();
             }
         }

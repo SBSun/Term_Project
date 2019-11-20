@@ -234,7 +234,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 11747457}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.13, y: -2.46, z: 0}
+  m_LocalPosition: {x: -8, y: -2.5, z: 0}
   m_LocalScale: {x: 0.8, y: 0.72, z: 1}
   m_Children: []
   m_Father: {fileID: 1943642628}
@@ -1161,8 +1161,8 @@ MonoBehaviour:
   theSaveLoad: {fileID: 1797530502}
   currentStage: {fileID: 604032990}
   stages:
+  - {fileID: 758881113}
   - {fileID: 604032990}
-  go_ChapterSelect: {fileID: 758881111}
   isGameover: 0
   score: 0
 --- !u!4 &173048101
@@ -2006,8 +2006,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   go_Player: {fileID: 11747457}
-  followSpeed: 1
-  isMove: 0
+  followSpeed: 2
+  center: {x: 0, y: 0}
+  size: {x: 0, y: 0}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -2559,6 +2560,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStartPosition: {x: -2, y: 0.5, z: 0}
+  stageCenter: {x: 35, y: -1.4}
+  stageSize: {x: 55, y: 10}
 --- !u!1 &620872352
 GameObject:
   m_ObjectHideFlags: 0
@@ -3647,6 +3650,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 758881112}
+  - component: {fileID: 758881113}
   m_Layer: 0
   m_Name: ChapterSelect
   m_TagString: Untagged
@@ -3672,6 +3676,21 @@ Transform:
   m_Father: {fileID: 1943642628}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &758881113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758881111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bc59e4ba7265f34db4153e843d7168c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStartPosition: {x: -8, y: -2.5, z: 0}
+  stageCenter: {x: 35, y: -1}
+  stageSize: {x: 53.5, y: 10}
 --- !u!1 &828563819
 GameObject:
   m_ObjectHideFlags: 0
@@ -3934,7 +3953,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 910719467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1e5d3ad8c02805428cc015730d1cea1, type: 3}
+  m_Script: {fileID: 11500000, guid: a422bca3b6b09ed4cbf7bc38d66aa991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   BackgroundPanel: {fileID: 620872352}

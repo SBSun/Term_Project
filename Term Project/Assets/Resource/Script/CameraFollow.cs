@@ -7,32 +7,44 @@ public class CameraFollow : MonoBehaviour
     public GameObject go_Player;
 
     public float followSpeed;
-    public bool isMove = true;
-    private double firstTransformY;
 
-    private void Awake()
+    public Vector2 center; //중심점
+    public Vector2 size; //크기
+
+    float width;
+    float height;
+
+    private void Start()
     {
-        firstTransformY = this.transform.position.y;
+        height = Camera.main.orthographicSize; //카메라의 세로 절반 길이
+        width = height * Screen.width / Screen.height; //카메라의 가로 절반 길이
     }
+
     void LateUpdate()
     {
         if (GameManager.instance.isGameover)
             return;
 
-        if (!isMove)
-            return;
+        transform.position = Vector3.Lerp( transform.position, GameManager.instance.player.transform.position, Time.deltaTime * followSpeed );
 
-        transform.localPosition = Vector3.Lerp( transform.localPosition, go_Player.transform.localPosition, Time.deltaTime * followSpeed );
-        transform.localPosition = new Vector3( transform.localPosition.x, transform.localPosition.y, -1f );
+        float mX = size.x * 0.5f - width;
+        float clampX = Mathf.Clamp( transform.position.x, -mX + center.x, mX + center.x );
+
+        float mY = size.y * 0.5f - height;
+        float clampY = Mathf.Clamp( transform.position.y, -mY + center.y, mY + center.y );
+
+        transform.position = new Vector3( clampX, clampY, -10 );
     }
 
-    public void StopCamera()
+    public void SetCamera()
     {
-        isMove = false;
+        center = GameManager.instance.currentStage.stageCenter;
+        size = GameManager.instance.currentStage.stageSize;
     }
 
-    public void MoveCamera()
+    private void OnDrawGizmos()
     {
-        isMove = true;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube( center, size );
     }
 }
