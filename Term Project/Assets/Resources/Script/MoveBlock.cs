@@ -4,52 +4,37 @@ using UnityEngine;
 
 public class MoveBlock : MonoBehaviour
 {
-    public enum MoveBlockType
-    {
-        MoveX,
-        MoveY
-    }
-    public MoveBlockType moveBlockType;
-
-    public float maxPositionX;
-    public float minPositionX;
-    public float maxPositionY;
-    public float minPositionY;
+    public Vector3 movePosition1;
+    public Vector3 movePosition2;
+    private Vector3 destination;
 
     public int   speed;
 
     public int   direction;
 
-    void Update()
+    private void Start()
     {
-        if (GameManager.instance.isGameover)
-            return;
+        if (direction == 1)
+            destination = movePosition1;
+        else if (direction == 2)
+            destination = movePosition2;
 
-        if (moveBlockType == MoveBlockType.MoveX)
+        StartCoroutine( MoveCoroutine() );
+    }
+
+    public IEnumerator MoveCoroutine()
+    {
+        while (!GameManager.instance.isGameover)
         {
-            if (transform.position.x >= maxPositionX)
-            {
-                direction = -1;
-            }
-                
-            else if (transform.position.x <= minPositionX)
-            {
-                direction = 1;
-            }
-                
-            Vector3 pos = Vector3.right * direction * speed * Time.deltaTime;
-            transform.position = transform.position + pos;
-        }
-        else
-        {
-            if (transform.position.y >= maxPositionY)
-                direction = -1;
+            if (Vector3.Distance( movePosition1, transform.localPosition ) <= 0.1f)
+                destination = movePosition2;
 
-            else if (transform.position.y <= minPositionY)
-                direction = 1;
+            else if (Vector3.Distance( movePosition2, transform.localPosition ) <= 0.1f)
+                destination = movePosition1;
 
-            Vector3 pos = Vector3.up * direction * speed * Time.deltaTime;
-            transform.position = transform.position + pos;
+            transform.localPosition = Vector3.MoveTowards( transform.localPosition, destination, speed * Time.deltaTime );
+
+            yield return null;
         }
     }
 }
