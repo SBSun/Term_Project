@@ -2547,7 +2547,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &604032989
 Transform:
   m_ObjectHideFlags: 0
@@ -2567,7 +2567,7 @@ Transform:
   - {fileID: 566139599}
   - {fileID: 30317013}
   - {fileID: 1711911219}
-  - {fileID: 1903248314}
+  - {fileID: 8558752221189093964}
   m_Father: {fileID: 1943642628}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2584,8 +2584,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStartPosition: {x: -66, y: 0.5, z: 0}
-  stageCenter: {x: 5, y: 0}
-  stageSize: {x: 120, y: 10}
+  stageCenter: {x: 4, y: 2}
+  stageSize: {x: 120, y: 14}
 --- !u!1 &620872352
 GameObject:
   m_ObjectHideFlags: 0
@@ -20231,12 +20231,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!4 &1903248314 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4696976729000072100, guid: 7f0eb2f1af0ad8b43b35631a1d2bded9,
-    type: 3}
-  m_PrefabInstance: {fileID: 8558752221189093963}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1934153606
 GameObject:
   m_ObjectHideFlags: 0
@@ -21569,11 +21563,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 604032989}
     m_Modifications:
-    - target: {fileID: 6379609792589328963, guid: 7f0eb2f1af0ad8b43b35631a1d2bded9,
-        type: 3}
-      propertyPath: m_Name
-      value: keyYellow
-      objectReference: {fileID: 0}
     - target: {fileID: 4696976729000072100, guid: 7f0eb2f1af0ad8b43b35631a1d2bded9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -21629,5 +21618,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 6379609792589328963, guid: 7f0eb2f1af0ad8b43b35631a1d2bded9,
+        type: 3}
+      propertyPath: m_Name
+      value: keyYellow
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f0eb2f1af0ad8b43b35631a1d2bded9, type: 3}
+--- !u!4 &8558752221189093964 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 8558752221189093963}
+  m_PrefabAsset: {fileID: 0}
