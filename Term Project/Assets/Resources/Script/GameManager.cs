@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public Stage[]       stages;
     public bool          isGameover = true;
     public int           score;
+    public int           key;   // 스테이지별로 필요한 키의 갯수가 다를 수 있기 때문에 int
 
     void Awake()
     {
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
             Destroy( gameObject );
 
         score = 0;
+        key = 0;
     }
 
     public void AddScore(int _score)
@@ -52,5 +54,6 @@ public class GameManager : MonoBehaviour
         stages[0].gameObject.SetActive( false );
         UIManager.instance.StartUI();
         currentStage.gameObject.SetActive( true );
+        SoundManager.instance.PlayBGM("Stage_1_BGM");
     }
 }

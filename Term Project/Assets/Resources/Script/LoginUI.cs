@@ -12,12 +12,40 @@ public class LoginUI : MonoBehaviour
     public GameObject pwTextBox;
     public GameObject outputLabel;
 
+    private InputField idInputField;
+    private InputField pwInputField;
+
+    private void Awake()
+    {
+        idInputField = idTextBox.GetComponent<InputField>();
+        pwInputField = pwTextBox.GetComponent<InputField>();
+    }
+
+    private void Update()
+    {
+        if ( idInputField.isFocused == true)
+        {
+            if (Input.GetKeyUp(KeyCode.Tab))
+            {
+                pwInputField.Select();
+            }
+        }
+
+        if (pwInputField.isFocused == true)
+        {
+            if (Input.GetKeyUp(KeyCode.Tab))
+            {
+                idInputField.Select();
+            }
+        }
+    }
+
     public void LoginButton()
     {
         SoundManager.instance.PlaySFX( "Click_1" );
 
-        string id = idTextBox.GetComponent<InputField>().text;
-        string pw = pwTextBox.GetComponent<InputField>().text;
+        string id = idInputField.text;
+        string pw = pwInputField.text;
         string did = string.Empty;
         string dpw = string.Empty;
 
