@@ -51,5 +51,6 @@ public class GameManager : MonoBehaviour
         stages[0].gameObject.SetActive( false );
         UIManager.instance.StartUI();
         currentStage.gameObject.SetActive( true );
+        SoundManager.instance.PlayBGM("Stage_1_BGM");
     }
 }
