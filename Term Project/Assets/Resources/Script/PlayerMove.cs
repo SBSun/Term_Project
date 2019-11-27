@@ -204,6 +204,12 @@ public class PlayerMove : LivingEntity
         {
             PlayerRespawn();
         }
+        else if(collision.transform.tag == "Key")
+        {
+            GameManager.instance.key += 1;
+            SoundManager.instance.PlaySFX("GetKey");
+            Destroy(collision.gameObject);
+        }
     }
 
     void OnCollisionStay2D( Collision2D collision )
