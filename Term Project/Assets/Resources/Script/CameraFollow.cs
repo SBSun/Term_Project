@@ -40,6 +40,7 @@ public class CameraFollow : MonoBehaviour
     {
         center = GameManager.instance.currentStage.stageCenter;
         size = GameManager.instance.currentStage.stageSize;
+        //스테이지마다 Start 좌표에서 시작
     }
 
     private void OnDrawGizmos()

@@ -12,7 +12,7 @@ public class Cloud : MonoBehaviour
     void Update()
     {
         if (transform.localPosition.x < minPosition)
-            transform.localPosition = new Vector3( maxPosition, Random.Range( 0.1f, 0.43f ) );
+            transform.localPosition = new Vector3( maxPosition, Random.Range( 1.6f, 3.4f ) );
 
         transform.Translate( Vector3.left * speed * Time.deltaTime );
     }

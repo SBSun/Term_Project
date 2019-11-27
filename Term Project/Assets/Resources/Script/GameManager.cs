@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public SaveLoad      theSaveLoad;
     public Stage         currentStage;
     public Stage[]       stages;
-    public bool          isGameover = false;
+    public bool          isGameover = true;
     public int           score;
 
     void Awake()
@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     public void ChapterSelectStageStart()
     {
+        isGameover = false;
         currentStage = stages[0];
         currentStage.gameObject.SetActive( true );
         player.transform.localPosition = currentStage.playerStartPosition;
