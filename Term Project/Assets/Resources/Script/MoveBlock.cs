@@ -6,7 +6,7 @@ public class MoveBlock : MonoBehaviour
 {
     public Vector3 movePosition1;
     public Vector3 movePosition2;
-    private Vector3 destination;
+    public Vector3 destination;
 
     public int   speed;
 
