@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8883102694755942517}
   - component: {fileID: 8883102694755942522}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: grassHalfLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8883102695851656982}
   - component: {fileID: 8883102695851656983}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: grassHalfRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8883102696607876865}
   - component: {fileID: 6936041285307478695}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MoveBlock_Grass
   m_TagString: Platform
   m_Icon: {fileID: 0}

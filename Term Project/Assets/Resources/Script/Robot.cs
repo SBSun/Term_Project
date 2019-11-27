@@ -84,7 +84,6 @@ public class Robot : Monster
                 coroutine = StartCoroutine( ThinkCoroutine() );
             }
             speed = 3f;
-            Debug.Log( "앞에 벽" );
             Turn();
         }
         else
@@ -122,7 +121,7 @@ public class Robot : Monster
         while(status == Status.Live)
         {
             nextMove = Random.Range( 0,2 );
-            Debug.Log( "코루틴 실행중" );
+
             if (nextMove == 0)
             {
                 spriteRenderer.flipX = true;
