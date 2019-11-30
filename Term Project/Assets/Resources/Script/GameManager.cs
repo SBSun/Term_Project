@@ -55,5 +55,12 @@ public class GameManager : MonoBehaviour
         UIManager.instance.StartUI();
         currentStage.gameObject.SetActive( true );
         SoundManager.instance.PlayBGM("Stage_1_BGM");
+        player.respawnPosition = currentStage.playerStartPosition;
+    }
+
+    public void CheckFlag(GameObject _go) // 플레이어가 flag를 먹으면 flag스크립트에서 실행할 함수
+    {
+        player.respawnPosition = _go.transform.localPosition;
+        Destroy(_go);
     }
 }

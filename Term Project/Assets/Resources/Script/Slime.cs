@@ -15,6 +15,7 @@ public class Slime : Monster
 
         onDie += () => monsterAnimator.SetTrigger( "Death" );
         onDie += () => gameObject.layer = 12;
+        onDie += () => SoundManager.instance.PlaySFX("SlimeDead");
         onDie += () => Destroy( gameObject, 1f );
     }
 

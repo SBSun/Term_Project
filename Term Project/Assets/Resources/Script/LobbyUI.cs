@@ -14,6 +14,7 @@ public class LobbyUI : MonoBehaviour
         go_LobbyUI.SetActive( false );
         GameManager.instance.ChapterSelectStageStart();
 
+        /* 데이터베이스 읽어오는 코드
         DataSet ds = SaveLoad.instance.DBReadByAdapter("SELECT * FROM user");
         DataRowCollection rows = ds.Tables[0].Rows;
         foreach (DataRow dr in rows)
@@ -24,5 +25,6 @@ public class LobbyUI : MonoBehaviour
             }
         }
         Debug.Log(rows[0]);
+        */
     }
 }
