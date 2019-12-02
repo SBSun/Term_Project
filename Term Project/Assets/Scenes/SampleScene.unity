@@ -274,6 +274,7 @@ MonoBehaviour:
   maxPositionX: 36
   minPositionX: -0.07
   isGround: 0
+  boxSize: {x: 0.5, y: 0.02}
 --- !u!114 &11747464
 MonoBehaviour:
   m_ObjectHideFlags: 0

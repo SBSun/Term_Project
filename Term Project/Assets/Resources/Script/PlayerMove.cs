@@ -27,6 +27,9 @@ public class PlayerMove : LivingEntity
     private int                 moveBlockSpeed;
     private int                 moveBlockDirection;
 
+    private RaycastHit2D        hitInfo;
+    public Vector2              boxSize;
+
     protected override void Awake()
     {
         base.Awake();
@@ -42,9 +45,29 @@ public class PlayerMove : LivingEntity
         if (status == Status.Die)
             return;
 
+        hitInfo = Physics2D.BoxCast( transform.position - new Vector3( 0, spriteRenderer.bounds.extents.y + boxSize.y / 2, 0 ), boxSize, 0, Vector2.down, boxSize.y );
+
+        if (hitInfo.transform != null)
+        {
+            if (hitInfo.transform.tag == "Platform" || hitInfo.transform.tag == "MoveBlock")
+            {
+                Debug.Log( "땅" );
+                isGround = true;
+            }
+            else
+                isGround = false;
+        }
+        else
+        {
+            isGround = false;
+            Debug.Log( "공중" );
+        }
+
         TryJump();
 
-        if(Input.GetButtonUp("Horizontal"))
+        playerAnimator.SetBool( "isGround", isGround );
+
+        if (Input.GetButtonUp("Horizontal"))
             playerRb.velocity = new Vector2( 0, playerRb.velocity.y );
 
         if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.RightArrow))
@@ -90,7 +113,6 @@ public class PlayerMove : LivingEntity
             if (getItem.isShield)
                 getItem.currentShield.LeftChange();
         }
-            
 
         playerRb.AddForce( Vector2.right * moveX, ForceMode2D.Impulse );
 
@@ -106,7 +128,6 @@ public class PlayerMove : LivingEntity
         {
             Jump();
             isGround = false;
-            playerAnimator.SetBool( "isGround", isGround );
         }
     }
 
@@ -161,12 +182,12 @@ public class PlayerMove : LivingEntity
     {
         if (collision.transform.tag == "Platform" || collision.transform.tag == "MoveBlock")
         {
-            if (collision.contacts[0].normal.y > 0.7f)
+            /*if (collision.contacts[0].normal.y > 0.7f)
             {
                 isGround = true;
                 playerAnimator.SetBool( "isGround", isGround);
                 playerRb.velocity = Vector2.zero;
-            }
+            }*/
 
             if(collision.transform.tag == "MoveBlock")
             {
@@ -237,8 +258,6 @@ public class PlayerMove : LivingEntity
         {
             isMoveBlock = false;
         }
-        else if (collision.transform.tag == "Platform")
-            isGround = false;
     }
 
     void OnTriggerStay2D( Collider2D collision )
@@ -256,5 +275,12 @@ public class PlayerMove : LivingEntity
     public void PlayerRespawn()
     {
         transform.localPosition = respawnPosition;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+
+        Gizmos.DrawWireCube( transform.position - new Vector3( 0, spriteRenderer.bounds.extents.y + boxSize.y/2, 0 ), boxSize );
     }
 }
