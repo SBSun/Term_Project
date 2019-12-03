@@ -128,6 +128,10 @@ public class PlayerMove : LivingEntity
         {
             Jump();
             isGround = false;
+        }       
+        if(Input.GetKeyUp(KeyCode.Space) && playerRb.velocity.y > 0)
+        {
+            playerRb.velocity = new Vector2(playerRb.velocity.x ,playerRb.velocity.y * 0.3f);
         }
     }
 
