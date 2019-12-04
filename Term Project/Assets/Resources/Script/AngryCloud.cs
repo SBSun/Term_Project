@@ -29,7 +29,7 @@ public class AngryCloud : Monster
         if (GameManager.instance.isGameover)
             return;
 
-        hitInfo = Physics2D.BoxCast( new Vector2(transform.position.x, transform.position.y - 1.5f), boxCollider.size, 0, Vector2.down, 10f, LayerMask.GetMask("Player") );
+        hitInfo = Physics2D.BoxCast( new Vector2(transform.position.x, transform.position.y - 1.5f), new Vector2(boxCollider.size.x * 0.5f, boxCollider.size.y), 0, Vector2.down, 10f, LayerMask.GetMask("Player") );
 
         if (hitInfo.collider != null)
         {
@@ -53,13 +53,10 @@ public class AngryCloud : Monster
                 {
                     _lastAttackTime = Time.time;
 
-                    GameObject clone = Instantiate( go_Lightning, new Vector3( transform.position.x - 0.5f, transform.position.y - 1f, 0 ), Quaternion.identity );
-                    GameObject clone2 = Instantiate( go_Lightning, new Vector3( transform.position.x + 0.5f, transform.position.y - 1f, 0 ), Quaternion.identity );
+                    GameObject clone = Instantiate( go_Lightning, new Vector3( transform.position.x - 0.5f, transform.position.y - spriteRenderer.bounds.extents.y * 2, 0 ), Quaternion.identity );
+                    GameObject clone2 = Instantiate( go_Lightning, new Vector3( transform.position.x + 0.5f, transform.position.y - spriteRenderer.bounds.extents.y * 2, 0 ), Quaternion.identity );
 
                     clone2.GetComponent<SpriteRenderer>().flipX = true;
-
-                    Destroy( clone, 5f );
-                    Destroy( clone2, 5f );
                 }
             }
             yield return null;
