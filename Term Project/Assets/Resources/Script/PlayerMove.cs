@@ -49,13 +49,17 @@ public class PlayerMove : LivingEntity
 
         if (hitInfo.transform != null)
         {
-            if (hitInfo.transform.tag == "Platform" || hitInfo.transform.tag == "MoveBlock")
+            if (hitInfo.transform.tag == "Platform" || hitInfo.transform.tag == "MoveBlock" || hitInfo.transform.tag == "Player")
             {
                 Debug.Log( "땅" );
                 isGround = true;
             }
             else
+            {
+                Debug.Log( hitInfo.transform.name );
+                Debug.Log( "땅이 아님" );
                 isGround = false;
+            }
         }
         else
         {
