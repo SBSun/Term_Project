@@ -29,7 +29,7 @@ public class AngryCloud : Monster
         if (GameManager.instance.isGameover)
             return;
 
-        hitInfo = Physics2D.BoxCast( new Vector2(transform.position.x, transform.position.y - 1.5f), boxCollider.size, 0, Vector2.down, 5f, LayerMask.GetMask("Player") );
+        hitInfo = Physics2D.BoxCast( new Vector2(transform.position.x, transform.position.y - 1.5f), boxCollider.size, 0, Vector2.down, 10f, LayerMask.GetMask("Player") );
 
         if (hitInfo.collider != null)
         {
