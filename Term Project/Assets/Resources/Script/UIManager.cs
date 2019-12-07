@@ -33,7 +33,6 @@ public class UIManager : MonoBehaviour
     {
         stageUI.go_StageUI.SetActive( false );
     }
-
     #region FadeText함수
     IEnumerator IFadeText(GameObject label, string str)
     {

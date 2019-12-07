@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Data;
+using System;
 
 public class LoginUI : MonoBehaviour
 {
@@ -69,6 +70,33 @@ public class LoginUI : MonoBehaviour
         //비교
         if ((id == did && pw == dpw) && (id!=string.Empty||pw!=string.Empty))
         {
+            #region masterVolume 초기화
+            DataSet ads = SaveLoad.instance.DBReadByAdapter("SELECT volume FROM setting WHERE id=" + "'" + id + "'");
+            DataRowCollection arows = ads.Tables[0].Rows;
+
+            string ats = string.Empty; // audio temp string
+            foreach (DataRow adr in arows)
+            {
+                ats = adr[0].ToString();
+            }
+
+            if (ats == string.Empty) // volume이 생성이 안되어있으면 
+            {
+                ats = "0.5";
+                SaveLoad.instance.DBInsert("INSERT INTO setting VALUES('" + id + "', 0.5)");
+            }
+
+            float atf = (float)Convert.ToDouble(ats);
+
+            if (atf >= 0.0f && atf <= 1.0f) // atd 범위체크
+                SoundManager.instance.masterVolume = atf;
+            else
+            {
+                atf = 0.5f;
+                SoundManager.instance.masterVolume = atf;
+            }
+            #endregion
+            GameManager.instance.currentUserID = id;
             gotoLobby();
         }
         else

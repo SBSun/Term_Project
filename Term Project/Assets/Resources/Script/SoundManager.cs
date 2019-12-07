@@ -30,6 +30,7 @@ public class SoundManager : MonoBehaviour
 
     public AudioSource bgmPlayer;
     public AudioSource sfxPlayer;
+    public float masterVolume;
 
     //------------------------------멤버 변수-------------------------------------
 
@@ -39,7 +40,8 @@ public class SoundManager : MonoBehaviour
             m_instance = this;
         else if (m_instance != this)
             DestroyImmediate( this.gameObject );
-
+        masterVolume = 0.5f;
+        AudioListener.volume = masterVolume;
     }
 
     void Start()
@@ -49,6 +51,10 @@ public class SoundManager : MonoBehaviour
         PlayBGM( "BGM_1" );
     }
 
+    private void Update()
+    {
+        AudioListener.volume = masterVolume;
+    }
     void LoadFiles()
     {
         AudioClip[] bgms = Resources.LoadAll<AudioClip>( "Sound/BGM" );

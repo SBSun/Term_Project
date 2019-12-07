@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public bool          isGameover = true;
     public int           score;
     public int           key;   // 스테이지별로 필요한 키의 갯수가 다를 수 있기 때문에 int
+    public string        currentUserID;
 
     void Awake()
     {
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
 
         score = 0;
         key = 0;
+        currentUserID = string.Empty;
     }
 
     public void AddScore(int _score)
