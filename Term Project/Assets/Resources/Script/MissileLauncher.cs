@@ -38,6 +38,8 @@ public class MissileLauncher : MonoBehaviour
                     missile.transform.parent = transform;
                     missile.GetComponent<Rigidbody2D>().velocity = Vector2.up * 5;
                     animator.SetTrigger( "Shoot" );
+                    Destroy(missile, 4.0f);
+                    SoundManager.instance.PlaySFX("missile");
                 }
             }
             yield return new WaitForSeconds( 0.1f );

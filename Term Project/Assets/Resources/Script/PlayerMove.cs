@@ -236,7 +236,7 @@ public class PlayerMove : LivingEntity
         else if(collision.transform.tag == "Key")
         {
             GameManager.instance.key += 1;
-            SoundManager.instance.PlaySFX("GetKey");
+            SoundManager.instance.PlaySFX("getCoin");
             Destroy(collision.gameObject);
         }
     }

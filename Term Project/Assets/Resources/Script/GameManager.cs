@@ -51,7 +51,12 @@ public class GameManager : MonoBehaviour
     {
         Camera.main.GetComponent<CameraFollow>().SetCamera();
         player.transform.localPosition = currentStage.playerStartPosition;
-        stages[0].gameObject.SetActive( false );
+        //stages[0].gameObject.SetActive( false );
+        //+추가된부분
+        for (int i = 0; i < stages.Length; i++)
+        {
+            stages[i].gameObject.SetActive(false);
+        }
         UIManager.instance.StartUI();
         currentStage.gameObject.SetActive( true );
         SoundManager.instance.PlayBGM("Stage_1_BGM");
