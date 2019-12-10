@@ -48,7 +48,7 @@ public class PlayerMove : LivingEntity
             status = Status.Live;
         }
 
-        hitInfo = Physics2D.BoxCast( transform.position - new Vector3( 0, spriteRenderer.bounds.extents.y + boxSize.y / 2, 0 ), boxSize, 0, Vector2.down, boxSize.y );
+        hitInfo = Physics2D.BoxCast( transform.position - new Vector3( 0, spriteRenderer.bounds.extents.y + boxSize.y / 2, 0 ), boxSize, 0, Vector2.down, boxSize.y, LayerMask.GetMask("Platform","CopyPlatform") );
 
         if (hitInfo.transform != null)
         {
@@ -151,43 +151,13 @@ public class PlayerMove : LivingEntity
 
     public override void OnDamage()
     {
-        if (!getItem.isShield)
-            curLife--;
-        else
-        {
-            getItem.isShield = false;
-            Destroy( getItem.currentShield.gameObject );
-            getItem.currentShield = null;
-        }
+        curLife--;
 
         if(curLife <= 0)
         {
             Die();
         }
-
-        if (curLife > 0)
-        {
-            gameObject.layer = 11;
-            UIManager.instance.stageUI.UpdateHpText();
-            playerRb.velocity = Vector2.zero;
-        }
-
-        if(getItem.isWeapon)
-            getItem.currentWeapon.GetComponent<SpriteRenderer>().color = new Color( 1, 1, 1, 0.4f );
-        spriteRenderer.color = new Color( 1, 1, 1, 0.4f );
-
-        Invoke( "OffDamage", 1.5f );
     }
-
-    public void OffDamage()
-    {
-        gameObject.layer = 10;
-
-        if(getItem.isWeapon)
-            getItem.currentWeapon.GetComponent<SpriteRenderer>().color = new Color( 1, 1, 1, 1 );
-        spriteRenderer.color = new Color( 1, 1, 1, 1 );
-    }
-
     void OnCollisionEnter2D( Collision2D collision )
     {
         if (collision.transform.tag == "Platform" || collision.transform.tag == "MoveBlock")

@@ -19651,7 +19651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStartPosition: {x: -66, y: 0.5, z: 0}
-  cameraStartPosition: {x: -65, y: 2, z: -1}
+  cameraStartPosition: {x: -65.99999, y: 1.53489, z: -1}
   stageCenter: {x: 42, y: 4}
   stageSize: {x: 200, y: 18}
   requireKeys: 1

@@ -55,7 +55,6 @@ public class GameManager : MonoBehaviour
     {
         isGameover = false;
         player.curLife = player.maxLife;
-        UIManager.instance.StartUI();
         if (isfirst == false) // 처음에 챕터셀렉트 갈땐 currentstage가 부서지면 안되므로
             Destroy(currentStage.gameObject);
         isfirst = false;
@@ -78,7 +77,6 @@ public class GameManager : MonoBehaviour
         //stages[0].gameObject.SetActive( false );
         //+추가된부분
         stages[0].gameObject.SetActive(false);
-        UIManager.instance.StartUI();
         currentStage = Instantiate(stages[1]);
         GameObject _tgo = GameObject.Find("GameApp");
         currentStage.transform.SetParent(_tgo.transform);

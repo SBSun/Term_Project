@@ -20,19 +20,9 @@ public class UIManager : MonoBehaviour
 
     public LoginUI loginUI;
     public LobbyUI lobbyUI;
-    public StageUI stageUI;
 
     private bool isPushedButton;
 
-    public void StartUI()
-    {
-        stageUI.StartUI();  
-    }
-
-    public void FinishUI()
-    {
-        stageUI.go_StageUI.SetActive( false );
-    }
     #region FadeText함수
     IEnumerator IFadeText(GameObject label, string str)
     {
