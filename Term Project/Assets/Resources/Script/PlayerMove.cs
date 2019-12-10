@@ -45,6 +45,7 @@ public class PlayerMove : LivingEntity
         if (status == Status.Die)
         {
             GameManager.instance.ChapterSelectStageStart();
+            status = Status.Live;
         }
 
         hitInfo = Physics2D.BoxCast( transform.position - new Vector3( 0, spriteRenderer.bounds.extents.y + boxSize.y / 2, 0 ), boxSize, 0, Vector2.down, boxSize.y );
@@ -164,9 +165,12 @@ public class PlayerMove : LivingEntity
             Die();
         }
 
-        gameObject.layer = 11;
-        UIManager.instance.stageUI.UpdateHpText();
-        playerRb.velocity = Vector2.zero;
+        if (curLife > 0)
+        {
+            gameObject.layer = 11;
+            UIManager.instance.stageUI.UpdateHpText();
+            playerRb.velocity = Vector2.zero;
+        }
 
         if(getItem.isWeapon)
             getItem.currentWeapon.GetComponent<SpriteRenderer>().color = new Color( 1, 1, 1, 0.4f );

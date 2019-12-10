@@ -264,8 +264,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba74f1a80bbb2ed4b8d050901649be16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 5
-  curLife: 5
+  maxLife: 2
+  curLife: 2
   playerRb: {fileID: 0}
   respawnPosition: {x: -2, y: 0.5, z: 0}
   walkSpeed: 4.5

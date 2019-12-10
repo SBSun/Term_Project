@@ -25,6 +25,7 @@ public class EndDoor : MonoBehaviour
                 if (isDoorOpened == false && GameManager.instance.currentStage.requireKeys <= GameManager.instance.key)
                 {
                     // 열리는 소리
+                    SoundManager.instance.PlaySFX("success");
                     // 스프라이트 바꾸기
                     go_Top.GetComponent<SpriteRenderer>().sprite = sp_openTop;
                     go_Mid.GetComponent<SpriteRenderer>().sprite = sp_openMid;
@@ -38,6 +39,7 @@ public class EndDoor : MonoBehaviour
                 else
                 {
                     // 잠긴 소리
+                    SoundManager.instance.PlaySFX("locked");
                 }
             }
         }
