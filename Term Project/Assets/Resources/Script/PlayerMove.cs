@@ -43,7 +43,9 @@ public class PlayerMove : LivingEntity
     void Update()
     {
         if (status == Status.Die)
-            return;
+        {
+            GameManager.instance.ChapterSelectStageStart();
+        }
 
         hitInfo = Physics2D.BoxCast( transform.position - new Vector3( 0, spriteRenderer.bounds.extents.y + boxSize.y / 2, 0 ), boxSize, 0, Vector2.down, boxSize.y );
 
@@ -51,20 +53,16 @@ public class PlayerMove : LivingEntity
         {
             if (hitInfo.transform.tag == "Platform" || hitInfo.transform.tag == "MoveBlock" || hitInfo.transform.tag == "Player")
             {
-                Debug.Log( "땅" );
                 isGround = true;
             }
             else
             {
-                Debug.Log( hitInfo.transform.name );
-                Debug.Log( "땅이 아님" );
                 isGround = false;
             }
         }
         else
         {
             isGround = false;
-            Debug.Log( "공중" );
         }
 
         TryJump();
@@ -216,7 +214,6 @@ public class PlayerMove : LivingEntity
                     {
                         if (collision.contacts[0].normal.y > 0.7f)
                         {
-                            Debug.Log( "공격" );
                             collision.transform.GetComponent<LivingEntity>().OnDamage();
                             playerRb.velocity = new Vector2( 0, 0 );
                             playerRb.AddForce( Vector2.up * 10f, ForceMode2D.Impulse );
@@ -273,6 +270,14 @@ public class PlayerMove : LivingEntity
         if(collision.tag == "StartDoor")
         {
             if(Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                GameManager.instance.currentStage = GameManager.instance.stages[collision.GetComponent<StartDoor>().chapterNumber];
+                GameManager.instance.StageStart();
+            }
+        }
+        if (collision.tag == "EndDoor")
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 GameManager.instance.currentStage = GameManager.instance.stages[collision.GetComponent<StartDoor>().chapterNumber];
                 GameManager.instance.StageStart();

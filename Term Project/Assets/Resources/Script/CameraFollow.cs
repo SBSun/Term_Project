@@ -25,8 +25,6 @@ public class CameraFollow : MonoBehaviour
         if (GameManager.instance.isGameover)
             return;
 
-        Debug.Log( transform.localPosition );
-
         transform.position = Vector3.Lerp( transform.position, GameManager.instance.player.transform.position, Time.deltaTime * followSpeed );
 
         float mX = size.x * 0.5f - width;

@@ -11,7 +11,7 @@ public class PauseUI : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Escape) && GameManager.instance.isPlayingStage)
         {
             Time.timeScale = 0.0f;
             volSlider.value = SoundManager.instance.masterVolume;
@@ -32,5 +32,11 @@ public class PauseUI : MonoBehaviour
             Time.timeScale = 1.0f;
         }
         backgroundPanel.SetActive(false);
+    }
+
+    public void GoSelectButton()
+    {
+        backgroundPanel.SetActive(false);
+        GameManager.instance.ChapterSelectStageStart();
     }
 }

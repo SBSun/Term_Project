@@ -11,54 +11,27 @@ public class Capture : MonoBehaviour
 
     private bool coolDown; // false가 되면 사용 가능
     private bool isFixed;
+    private bool isFirst;
 
-    /* s를 한번 더 눌러서 고정하는 방법
     void Start()
     {
-        copiedGrid.transform.position = originGrid.transform.position;
-        copiedGrid.SetActive(false);
         coolDown = false;
-        isFixed = false;
+        isFirst = true;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S) && coolDown == false)
+        if (Input.GetKeyDown(KeyCode.S) && coolDown == false && GameManager.instance.isPlayingStage)
         {
-            coolDown = true;
-            copiedGrid.SetActive(true);
-            copiedGrid.transform.SetParent(Player.transform);
-        }
-        else if (Input.GetKeyDown(KeyCode.S) && coolDown == true && isFixed == false)
-        {
-            isFixed = true;
-            copiedGrid.transform.parent = null;
-            StartCoroutine("FixGrid");
-        }
-    }
-
-    IEnumerator FixGrid()
-    {
-        yield return new WaitForSeconds(3.0f);
-        copiedGrid.transform.position = originGrid.transform.position;
-        copiedGrid.SetActive(false);
-        coolDown = false;
-        isFixed = false;
-    }
-    */
-
-    // 1초 후 땅이 고정되고 4초간 지속
-    void Start()
-    {
-        copiedGrid.transform.position = originGrid.transform.position;
-        copiedGrid.SetActive(false);
-        coolDown = false;
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.S) && coolDown == false)
-        {
+            if (isFirst)
+            {
+                /*
+                originGrid = GameObject.Find("OriginGrid");
+                copiedGrid = GameObject.Find("CopiedGrid");
+                isFirst = false;
+                */
+                Player = GameObject.Find("Player");
+            }
             StartCoroutine("DoCapture");
         }
     }
@@ -66,6 +39,7 @@ public class Capture : MonoBehaviour
     IEnumerator DoCapture()
     {
         coolDown = true;
+        copiedGrid.transform.position = originGrid.transform.position;
         copiedGrid.SetActive(true);
         copiedGrid.transform.SetParent(Player.transform);
 
@@ -79,5 +53,42 @@ public class Capture : MonoBehaviour
         copiedGrid.SetActive(false);
         coolDown = false;
     }
+
+    /* s를 한번 더 눌러서 고정하는 방법
+void Start()
+{
+    copiedGrid.transform.position = originGrid.transform.position;
+    copiedGrid.SetActive(false);
+    coolDown = false;
+    isFixed = false;
+}
+
+void Update()
+{
+    if (Input.GetKeyDown(KeyCode.S) && coolDown == false)
+    {
+        coolDown = true;
+        copiedGrid.SetActive(true);
+        copiedGrid.transform.SetParent(Player.transform);
+    }
+    else if (Input.GetKeyDown(KeyCode.S) && coolDown == true && isFixed == false)
+    {
+        isFixed = true;
+        copiedGrid.transform.parent = null;
+        StartCoroutine("FixGrid");
+    }
+}
+
+IEnumerator FixGrid()
+{
+    yield return new WaitForSeconds(3.0f);
+    copiedGrid.transform.position = originGrid.transform.position;
+    copiedGrid.SetActive(false);
+    coolDown = false;
+    isFixed = false;
+}
+*/
+
+    // 1초 후 땅이 고정되고 4초간 지속
 }
 
