@@ -45,7 +45,7 @@ public class Capture : MonoBehaviour
 
         yield return new WaitForSeconds(1.0f);
 
-        copiedGrid.transform.parent = null;
+        copiedGrid.transform.parent = GameObject.Find("Platform Group").transform;
 
         yield return new WaitForSeconds(3.0f);
 

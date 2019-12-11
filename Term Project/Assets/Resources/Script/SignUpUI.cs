@@ -93,6 +93,7 @@ public class SignUpUI : MonoBehaviour
     // id의 중복을 검사함
     private bool CheckDB()
     {
+        did = string.Empty;
         DataSet ds = SaveLoad.instance.DBReadByAdapter("SELECT id FROM user WHERE id=" + "'" + id +"'");
         DataRowCollection rows = ds.Tables[0].Rows;
         foreach (DataRow dr in rows)

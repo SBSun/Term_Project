@@ -37,6 +37,10 @@ public class PauseUI : MonoBehaviour
     public void GoSelectButton()
     {
         backgroundPanel.SetActive(false);
+        if (Time.timeScale != 1.0f)
+        {
+            Time.timeScale = 1.0f;
+        }
         GameManager.instance.ChapterSelectStageStart();
     }
 }

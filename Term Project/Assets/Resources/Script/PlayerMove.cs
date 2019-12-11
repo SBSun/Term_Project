@@ -204,12 +204,6 @@ public class PlayerMove : LivingEntity
         {
             PlayerRespawn();
         }
-        else if(collision.transform.tag == "Key")
-        {
-            GameManager.instance.key += 1;
-            SoundManager.instance.PlaySFX("getCoin");
-            Destroy(collision.gameObject);
-        }
     }
 
     void OnCollisionStay2D( Collision2D collision )
@@ -256,6 +250,12 @@ public class PlayerMove : LivingEntity
                 GameManager.instance.currentStage = GameManager.instance.stages[collision.GetComponent<StartDoor>().chapterNumber];
                 GameManager.instance.StageStart();
             }
+        }
+        else if (collision.transform.tag == "Key")
+        {
+            GameManager.instance.key += 1;
+            SoundManager.instance.PlaySFX("getCoin");
+            Destroy(collision.gameObject);
         }
     }
 
